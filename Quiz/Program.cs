@@ -15,15 +15,18 @@ namespace Quiz
 
             Console.ReadLine();
 
+            List<int> questions = new List<int>();
             for (int i = 0; i < 10; i++)
             {
-                bool correct = false;
-                int question = ran.Next(1, 32);
-
-
-                if (correct)
+            Again:
+                int next = ran.Next(1, 32);
+                if (questions.Contains(next))
                 {
-                    points++;
+                    goto Again;
+                }
+                else
+                {
+                    questions.Add(next);
                 }
             }
         }
