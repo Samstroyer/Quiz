@@ -125,10 +125,8 @@ namespace Quiz
             }
 
             return tempScore;
-
         }
         static string[][] mess()
-
         {
             string[] contents = File.ReadAllLines(@"..\qna.csv");
             List<string[]> LineContents = new List<string[]>();
@@ -158,7 +156,6 @@ namespace Quiz
                 }
             }
             return questions;
-
         }
     }
 }
