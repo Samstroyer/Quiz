@@ -12,8 +12,7 @@ namespace Quiz
             int diff;
 
             Console.WriteLine("Välkommen till mitt quiz!");
-            Console.WriteLine($"test {points}");
-            Console.WriteLine("Svara med 1-3 på tangentbordet, försök få så många poäng som möjligt!");
+            Console.WriteLine("Svara med 1-3 på tangentbordet eller ordet beroende på svårighet!\nFörsök få så många poäng som möjligt!");
 
             Console.ReadLine();
 
@@ -34,22 +33,19 @@ namespace Quiz
                 goto difficulty;
             }
 
-            Console.WriteLine("You finished the quiz with");
+            Console.WriteLine($"You finished the quiz with: {points}/10");
+            Console.WriteLine("Do you want to play again? (y)");
 
-
-            Console.ReadLine();
-
-            /* 
-            Console.ReadLine();
-            qna[1][0] == question
-            qna[1][1] == answer
-
-            foreach (int n in questions)
+            string svar = Console.ReadLine().ToLower();
+            if (svar == "y")
             {
-                Console.WriteLine(n);
+                goto difficulty;
             }
-            */
-
+            else
+            {
+                Console.WriteLine("Thanks for playing!");
+                Console.ReadLine();
+            }
         }
 
 
@@ -62,6 +58,7 @@ namespace Quiz
 
             foreach (int q in questions)
             {
+                Console.Clear();
                 List<int> alternativ = new List<int>();
                 for (int i = 0; i < 3; i++)
                 {
@@ -82,12 +79,19 @@ namespace Quiz
                 alternativ[correct] = q;
 
                 Console.WriteLine(qna[q][0]);
-                Console.Write($"1) {qna[alternativ[0]][1]}. 2) {qna[alternativ[1]][1]}. 3) {qna[alternativ[2]][1]}");
+                Console.WriteLine($"1) {qna[alternativ[0]][1]}   2) {qna[alternativ[1]][1]}   3) {qna[alternativ[2]][1]}");
                 int svar = Int32.Parse(Console.ReadLine());
 
-                if (svar - 1 == alternativ[correct])
+                if (svar - 1 == correct)
                 {
                     tempScore++;
+                    Console.WriteLine("Correct!");
+                    System.Threading.Thread.Sleep(500);
+                }
+                else
+                {
+                    Console.WriteLine("Wrong, better luck next time!");
+                    System.Threading.Thread.Sleep(500);
                 }
             }
 
@@ -96,25 +100,27 @@ namespace Quiz
 
         static int hard()
         {
+            Console.Clear();
             int tempScore = 0;
             List<int> questions = generateQuestions();
             string[][] qna = mess();
 
             foreach (int q in questions)
             {
+                Console.Clear();
                 Console.WriteLine(qna[q][0]);
                 string svar = Console.ReadLine().ToLower();
 
-                if (svar == qna[q][1])
+                if (svar == qna[q][1].ToLower())
                 {
                     tempScore++;
                     Console.WriteLine("Correct!");
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(500);
                 }
                 else
                 {
                     Console.WriteLine("Wrong, better luck next time!");
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(500);
                 }
             }
 
@@ -141,7 +147,7 @@ namespace Quiz
             for (int i = 0; i < 10; i++)
             {
             Again:
-                int next = ran.Next(1, 32);
+                int next = ran.Next(1, 31);
                 if (questions.Contains(next))
                 {
                     goto Again;
