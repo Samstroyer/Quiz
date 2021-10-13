@@ -126,6 +126,7 @@ namespace Quiz
 
             return tempScore;
         }
+
         static string[][] mess()
         {
             string[] contents = File.ReadAllLines(@"..\qna.csv");
@@ -136,6 +137,7 @@ namespace Quiz
             }
             return LineContents.ToArray();
         }
+
         static List<int> generateQuestions()
         {
             Random ran = new Random();
